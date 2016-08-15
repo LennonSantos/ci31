@@ -7,6 +7,7 @@
 	<meta name="author" content="{author}">
 	<title>{name_page}</title>
 	{css}
-	<link rel="stylesheet" href="{0}">
+	<link rel="stylesheet" href="{0}.css">
 	{/css}
 </head>
+<body>
