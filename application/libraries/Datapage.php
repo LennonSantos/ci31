@@ -10,10 +10,12 @@ class Datapage {
 
         	return $data = array(
 				'css' => array( 
-					array( $cssurl . 'styles' ),
-					array( $cssurl . 'test'   )
+					array( $cssurl . 'animated-icons.css' ),
+					array( $cssurl . 'styles.css' ),
+					array(           'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css'   )
 				),
 				'js' => array( 
+					array( $jsurl . 'jquery.min' ),
 					array( $jsurl . 'scripts' ),
 					array( $jsurl . 'test'   )
 				),

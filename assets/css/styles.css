@@ -2,3 +2,5 @@
 a{display: inline-block;}
 body{ font-size: 62.5%; font-family: "arial", sans-serif; color: #555;}
 img{border: 0; max-width: 100%;}
+
+.visibility-hidden{visibility: hidden;}

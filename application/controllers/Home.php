@@ -25,22 +25,41 @@ class Home extends CI_Controller {
 
 	public function email($action = null)
 	{
+		$this->load->library('redirect');
+
 		if($action === 'enviar')
 		{
-			$this->load->library('sendemail');
-			$this->sendemail->send(
-				array(
-					"from" => "lennonsbueno@teste",
-					"from_name" => "lennon teste",
-					"subject" => "Assunto do email",
-					"to" => "lennon-limao@hotmail.com",
-					"message" => "olá teste"
-				)
+			$this->load->library('send');
+
+			$dataEmail = array(
+				"from"      => "lennonsbueno@teste",
+				"from_name" => "lennon teste",
+				"subject"   => "Assunto do email",
+				"reply_to"  => null,
+				"to"        => $this->input->post('txtTo'),
+				"cc"        => null,
+				"bcc"       => null,
+				"message"   => $this->input->post('txtMsg')
 			);
+
+			if($this->send->email($dataEmail))
+				echo "#sucess";
+			else echo "#false";
+			exit();
 		}
 
 		$this->parser->parse('page/master_page/head', $this->data);
 		$this->load->view('page/email');
+		$this->parser->parse('page/master_page/footer', $this->data);
+	}
+
+	public function seguranca()
+	{
+		$this->load->library('password');
+
+		echo $hash = $this->password->create('minhasenha123');
+		echo $this->password->compare('minhasenha123', $hash);
+		
 		$this->parser->parse('page/master_page/footer', $this->data);
 	}
 

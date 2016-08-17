@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sendemail 
+class Send 
 {
-    public function send($data = array())
+    public function email($data = array())
     {
     	$CI =& get_instance();
     	
@@ -11,15 +11,14 @@ class Sendemail
 
 		$CI->email->from($data['from'], $data['from_name']);
 		$CI->email->subject($data['subject']);
-		//$this->email->reply_to("email_de_resposta@dominio.com");
+		$CI->email->reply_to($data['reply_to']);
 		$CI->email->to($data['to']); 
-		//$this->email->cc('email_copia@dominio.com');
-		//$this->email->bcc('email_copia_oculta@dominio.com');
+		$CI->email->cc($data['cc']);
+		$CI->email->bcc($data['bcc']);
 		$CI->email->message($data['message']);
 		if($CI->email->send())
 			return true;
 		else
 			return false;
-
     }
 }
