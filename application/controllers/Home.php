@@ -23,34 +23,51 @@ class Home extends CI_Controller {
 		$this->parser->parse('page/master_page/footer', $this->data);
 	}
 
-	public function email($action = null)
+	public function email()
 	{
-		$this->load->library('redirect');
-
-		if($action === 'enviar')
-		{
-			$this->load->library('send');
-
-			$dataEmail = array(
-				"from"      => "lennonsbueno@teste",
-				"from_name" => "lennon teste",
-				"subject"   => "Assunto do email",
-				"reply_to"  => null,
-				"to"        => $this->input->post('txtTo'),
-				"cc"        => null,
-				"bcc"       => null,
-				"message"   => $this->input->post('txtMsg')
-			);
-
-			if($this->send->email($dataEmail))
-				echo "#sucess";
-			else echo "#false";
-			exit();
-		}
-
 		$this->parser->parse('page/master_page/head', $this->data);
 		$this->load->view('page/email');
 		$this->parser->parse('page/master_page/footer', $this->data);
+	}
+	public function emailenviar()
+	{
+		$this->load->library('send');
+
+		$dataEmail = array(
+			"from"      => "lennonsbueno@teste",
+			"from_name" => "lennon teste",
+			"subject"   => "Assunto do email",
+			"reply_to"  => null,
+			"to"        => $this->input->post('txtTo'),
+			"cc"        => null,
+			"bcc"       => null,
+			"message"   => $this->input->post('txtMsg')
+		);
+
+		if($this->send->email($dataEmail))
+			$this->ajax_redirect("home/email#sucess");
+		else 
+			$this->ajax_redirect("home/email#falha");
+		
+	}
+
+	public function ajax_redirect($location = '')
+	{
+	    $location = empty($location) ? '/' : $location;
+	    if (strpos($location, '/') !== 0 || strpos($location, '://') !== FALSE)
+	    {
+	        if ( ! function_exists('site_url'))
+	        {
+	            $this->load->helper('url');
+	        }
+
+	        $location = site_url($location);
+	    }
+
+	    $script = "window.location='{$location}';";
+	    $this->output->enable_profiler(FALSE)
+	        ->set_content_type('application/x-javascript')
+	        ->set_output($script);
 	}
 
 	public function seguranca()

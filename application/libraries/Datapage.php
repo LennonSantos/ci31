@@ -15,9 +15,9 @@ class Datapage {
 					array(           'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css'   )
 				),
 				'js' => array( 
-					array( $jsurl . 'jquery.min' ),
-					array( $jsurl . 'scripts' ),
-					array( $jsurl . 'test'   )
+					array( $jsurl . 'jquery.min.js' ),
+					array( $jsurl . 'scripts.js' ),
+					array( $jsurl . 'test.js'   )
 				),
 				'description' => "des",
 				'keywords'    => "key",
